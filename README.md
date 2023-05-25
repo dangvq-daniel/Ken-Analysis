@@ -1,4 +1,4 @@
-**What Ken Jee's viewers are thinking about him
+**What Ken Jee's viewers are thinking about him**
 This is a project that is built upon the data set shared by Youtuber Ken Jee. As the data set's name, the stakeholder is a Youtuber and he wants to know how to grow is channel. 
 
 The analysis is put in the form of a dashboard with select boxes on the left.
