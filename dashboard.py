@@ -125,32 +125,7 @@ if add_sidebar == 'Aggregate Metrics':
     
     fig = px.bar(df_yearly_videos, x = 'Year', y = 'Video', labels = {'Video': 'Number of Videos'}, title='Videos by Year')
     st.plotly_chart(fig)
-    
-if add_sidebar == 'Top 10 Analysis':
-    df_agg_sub_sum = df_agg_sub.groupby('Video Title').agg({
-    'Views' : 'sum',
-    'Video Likes Added': 'sum',
-    'Video Likes Removed': 'sum',
-    'User Subscriptions Added': 'sum',
-    'User Subscriptions Removed': 'sum'
-    }).reset_index()
-    df_agg_sub_sum['Total Likes'] = df_agg_sub_sum['Video Likes Added'] - df_agg_sub_sum['Video Likes Removed']
-    
-    top_views = df_agg_sub_sum.nlargest(10, 'Views')
-    top_likes = df_agg_sub_sum.nlargest(10, 'Total Likes')
-    top_sub_gain = df_agg_sub_sum.nlargest(10, 'User Subscriptions Added')
-    top_sub_lost = df_agg_sub_sum.nlargest(10, 'User Subscriptions Removed')
-    
-    fig_views = px.bar(top_views, x='Views', y='Video Title', orientation='h', title='Top 10 Videos by Views')
-    fig_likes = px.bar(top_likes, x='Total Likes', y='Video Title', orientation = 'h', title='Top 10 Most Liked Videos')
-    fig_subs_added = px.bar(top_sub_gain, x='User Subscriptions Added', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Added')
-    fig_subs_removed = px.bar(top_sub_lost, x='User Subscriptions Removed', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Removed')
-    
-    st.plotly_chart(fig_views)
-    st.plotly_chart(fig_likes)
-    st.plotly_chart(fig_subs_added)
-    st.plotly_chart(fig_subs_removed)
-    
+    st.write("As we can clearly see, 2020 stands head and shoulder above all others doubling the second highest video per year count in 2019. Starting from 2019, Ken Jee have increased his involvment in content creation dramatically, perhaps signalling his checkpoint for the devotion for Youtube.")
     
 if add_sidebar == 'Individual Video Analysis':
     video = tuple(df_agg['Video title'])
@@ -187,3 +162,312 @@ if add_sidebar == 'Individual Video Analysis':
                         yaxis_title = 'Cumulative views')
     
     st.plotly_chart(fig2)
+
+if add_sidebar == 'Top 10 Analysis':
+    df_agg_sub_sum = df_agg_sub.groupby('Video Title').agg({
+    'Views' : 'sum',
+    'Video Likes Added': 'sum',
+    'Video Dislikes Added': 'sum',
+    'Video Likes Removed': 'sum',
+    'User Subscriptions Added': 'sum',
+    'User Subscriptions Removed': 'sum'
+    }).reset_index()
+    df_agg_sub_sum['Total Likes'] = df_agg_sub_sum['Video Likes Added'] - df_agg_sub_sum['Video Likes Removed']
+    
+    top_views = df_agg_sub_sum.nlargest(10, 'Views')
+    top_likes = df_agg_sub_sum.nlargest(10, 'Total Likes')
+    top_dislikes = df_agg_sub_sum.nlargest(10, 'Video Dislikes Added')
+    top_sub_gain = df_agg_sub_sum.nlargest(10, 'User Subscriptions Added')
+    top_sub_lost = df_agg_sub_sum.nlargest(10, 'User Subscriptions Removed')
+    
+    fig_views = px.bar(top_views, x='Views', y='Video Title', orientation='h', title='Top 10 Videos by Views')
+    fig_likes = px.bar(top_likes, x='Total Likes', y='Video Title', orientation = 'h', title='Top 10 Most Liked Videos')
+    fig_dislikes = px.bar(top_dislikes, x='Video Dislikes Added', y = 'Video Title', orientation='h', title= 'Top 10 Most Disliked Videos')
+    fig_subs_added = px.bar(top_sub_gain, x='User Subscriptions Added', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Added')
+    fig_subs_removed = px.bar(top_sub_lost, x='User Subscriptions Removed', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Removed')
+    
+    st.plotly_chart(fig_views)
+    st.plotly_chart(fig_likes)
+    st.plotly_chart(fig_dislikes)
+    st.plotly_chart(fig_subs_added)
+    st.plotly_chart(fig_subs_removed)
+    
+    st.write("The video \" How I Would Learn Data Science (If I Had To Start Over)\" is the best performing video, having any where from doubling to nearly quintupling the number of engagement of the second-running up.")
+    st.write("An interesting video's metrics is the one titled \" Why I Quit Data Science\" ranking the third highest subscriber lost. This could potentially be a result of misleading title where creators would use ambiguous thumbnails to gain clicks but result in negative feedback from viewers")
+    country_mapping = {
+    'AF': 'AFG', 'AX': 'ALA',
+    'AL': 'ALB', 'DZ': 'DZA',
+    'AS': 'ASM', 'AD': 'AND',
+    'AO': 'AGO', 'AI': 'AIA',
+    'AQ': 'ATA', 'AG': 'ATG',
+    'AR': 'ARG', 'AM': 'ARM',
+    'AW': 'ABW', 'AU': 'AUS',
+    'AT': 'AUT', 'AZ': 'AZE',
+    'BS': 'BHS', 'BH': 'BHR',
+    'BD': 'BGD', 'BB': 'BRB',
+    'BY': 'BLR', 'BE': 'BEL',
+    'BZ': 'BLZ', 'BJ': 'BEN',
+    'BM': 'BMU', 'BT': 'BTN',
+    'BO': 'BOL', 'BQ': 'BES',
+    'BA': 'BIH', 'BW': 'BWA',
+    'BV': 'BVT', 'BR': 'BRA',
+    'IO': 'IOT', 'BN': 'BRN',
+    'BG': 'BGR', 'BF': 'BFA',
+    'BI': 'BDI', 'CV': 'CPV',
+    'KH': 'KHM', 'CM': 'CMR',
+    'CA': 'CAN', 'KY': 'CYM',
+    'CF': 'CAF', 'TD': 'TCD',
+    'CL': 'CHL', 'CN': 'CHN',
+    'CX': 'CXR', 'CC': 'CCK',
+    'CO': 'COL', 'KM': 'COM',
+    'CG': 'COG', 'CD': 'COD',
+    'CK': 'COK', 'CR': 'CRI',
+    'CI': 'CIV', 'HR': 'HRV',
+    'CU': 'CUB', 'CW': 'CUW',
+    'CY': 'CYP', 'CZ': 'CZE',
+    'DK': 'DNK', 'DJ': 'DJI',
+    'DM': 'DMA', 'DO': 'DOM',
+    'EC': 'ECU', 'EG': 'EGY',
+    'SV': 'SLV', 'GQ': 'GNQ',
+    'ER': 'ERI', 'EE': 'EST', 
+    'SZ': 'SWZ', 'ET': 'ETH',
+    'FK': 'FLK', 'FO': 'FRO',
+    'FJ': 'FJI',
+    'FI': 'FIN',
+    'FR': 'FRA',
+    'GF': 'GUF',
+    'PF': 'PYF',
+    'TF': 'ATF',
+    'GA': 'GAB',
+    'GM': 'GMB',
+    'GE': 'GEO',
+    'DE': 'DEU',
+    'GH': 'GHA',
+    'GI': 'GIB',
+    'GR': 'GRC',
+    'GL': 'GRL',
+    'GD': 'GRD',
+    'GP': 'GLP',
+    'GU': 'GUM',
+    'GT': 'GTM',
+    'GG': 'GGY',
+    'GN': 'GIN',
+    'GW': 'GNB',
+    'GY': 'GUY',
+    'HT': 'HTI',
+    'HM': 'HMD',
+    'VA': 'VAT',
+    'HN': 'HND',
+    'HK': 'HKG',
+    'HU': 'HUN',
+    'IS': 'ISL',
+    'IN': 'IND',
+    'ID': 'IDN',
+    'IR': 'IRN',
+    'IQ': 'IRQ',
+    'IE': 'IRL',
+    'IM': 'IMN',
+    'IL': 'ISR',
+    'IT': 'ITA',
+    'JM': 'JAM',
+    'JP': 'JPN',
+    'JE': 'JEY',
+    'JO': 'JOR',
+    'KZ': 'KAZ',
+    'KE': 'KEN',
+    'KI': 'KIR',
+    'KP': 'PRK',
+    'KR': 'KOR',
+    'KW': 'KWT',
+    'KG': 'KGZ',
+    'LA': 'LAO',
+    'LV': 'LVA',
+    'LB': 'LBN',
+    'LS': 'LSO',
+    'LR': 'LBR',
+    'LY': 'LBY',
+    'LI': 'LIE',
+    'LT': 'LTU',
+    'LU': 'LUX',
+    'MO': 'MAC',
+    'MK': 'MKD',
+    'MG': 'MDG',
+    'MW': 'MWI',
+    'MY': 'MYS',
+    'MV': 'MDV',
+    'ML': 'MLI',
+    'MT': 'MLT',
+    'MH': 'MHL',
+    'MQ': 'MTQ',
+    'MR': 'MRT',
+    'MU': 'MUS',
+    'YT': 'MYT',
+    'MX': 'MEX',
+    'FM': 'FSM',
+    'MD': 'MDA',
+    'MC': 'MCO',
+    'MN': 'MNG',
+    'ME': 'MNE',
+    'MS': 'MSR',
+    'MA': 'MAR',
+    'MZ': 'MOZ',
+    'MM': 'MMR',
+    'NA': 'NAM',
+    'NR': 'NRU',
+    'NP': 'NPL',
+    'NL': 'NLD',
+    'NC': 'NCL',
+    'NZ': 'NZL',
+    'NI': 'NIC',
+    'NE': 'NER',
+    'NG': 'NGA',
+    'NU': 'NIU',
+    'NF': 'NFK',
+    'MP': 'MNP',
+    'NO': 'NOR',
+    'OM': 'OMN',
+    'PK': 'PAK',
+    'PW': 'PLW',
+    'PS': 'PSE',
+    'PA': 'PAN',
+    'PG': 'PNG',
+    'PY': 'PRY',
+    'PE': 'PER',
+    'PH': 'PHL',
+    'PN': 'PCN',
+    'PL': 'POL',
+    'PT': 'PRT',
+    'PR': 'PRI',
+    'QA': 'QAT',
+    'RE': 'REU',
+    'RO': 'ROU',
+    'RU': 'RUS',
+    'RW': 'RWA',
+    'BL': 'BLM',
+    'SH': 'SHN',
+    'KN': 'KNA',
+    'LC': 'LCA',
+    'MF': 'MAF',
+    'PM': 'SPM',
+    'VC': 'VCT',
+    'WS': 'WSM',
+    'SM': 'SMR',
+    'ST': 'STP',
+    'SA': 'SAU',
+    'SN': 'SEN',
+    'RS': 'SRB',
+    'SC': 'SYC',
+    'SL': 'SLE',
+    'SG': 'SGP',
+    'SX': 'SXM',
+    'SK': 'SVK',
+    'SI': 'SVN',
+    'SB': 'SLB',
+    'SO': 'SOM',
+    'ZA': 'ZAF',
+    'GS': 'SGS',
+    'SS': 'SSD',
+    'ES': 'ESP',
+    'LK': 'LKA',
+    'SD': 'SDN',
+    'SR': 'SUR',
+    'SJ': 'SJM',
+    'SE': 'SWE',
+    'CH': 'CHE',
+    'SY': 'SYR',
+    'TW': 'TWN',
+    'TJ': 'TJK',
+    'TZ': 'TZA',
+    'TH': 'THA',
+    'TL': 'TLS',
+    'TG': 'TGO',
+    'TK': 'TKL',
+    'TO': 'TON',
+    'TT': 'TTO',
+    'TN': 'TUN',
+    'TR': 'TUR',
+    'TM': 'TKM',
+    'TC': 'TCA',
+    'TV': 'TUV',
+    'UG': 'UGA',
+    'UA': 'UKR',
+    'AE': 'ARE',
+    'GB': 'GBR',
+    'UM': 'UMI',
+    'US': 'USA',
+    'UY': 'URY',
+    'UZ': 'UZB',
+    'VU': 'VUT',
+    'VE': 'VEN',
+    'VN': 'VNM',
+    'VG': 'VGB',
+    'VI': 'VIR',
+    'WF': 'WLF',
+    'EH': 'ESH',
+    'YE': 'YEM',
+    'ZM': 'ZMB',
+    'ZW': 'ZWE',
+    'VN': 'VNM',
+}
+    df_agg_sub['Country Code 3'] = df_agg_sub['Country Code'].map(country_mapping)
+    df_views_by_country = df_agg_sub.groupby('Country Code 3')['Views'].sum().reset_index()
+    
+    fig = px.choropleth(
+        df_views_by_country,
+        locations='Country Code 3',
+        color='Views',
+        color_continuous_scale='Blues',
+        color_continuous_midpoint=df_views_by_country['Views'].median(),
+        title='Total Views by Country',
+        projection='natural earth'  # Try different projections here
+    )
+    
+    # Set the layout for the map
+    fig.update_geos(
+        showcountries=True,
+        countrycolor="gray",
+        showocean=True,
+        oceancolor="lightblue",
+        showland=True,
+        landcolor="white",
+        showcoastlines=True,
+        coastlinecolor="darkgray",
+        showframe=False
+    )
+    fig.update_layout(height=500, margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_traces(marker_line_color='black', 
+                  marker_line_width=0.5)
+
+    st.plotly_chart(fig)
+    
+    excluded_countries = ['USA', 'IND']
+
+    # Filter the DataFrame to exclude specific countries
+    df_filtered = df_views_by_country[~df_views_by_country['Country Code 3'].isin(excluded_countries)]
+    fig = px.choropleth(
+        df_filtered,
+        locations='Country Code 3',
+        color='Views',
+        color_continuous_scale='Blues',
+        color_continuous_midpoint=df_views_by_country['Views'].median(),
+        title='Total Views by Country',
+        projection='natural earth'  # Try different projections here
+    )
+    
+    # Set the layout for the map
+    fig.update_geos(
+        showcountries=True,
+        countrycolor="gray",
+        showocean=True,
+        oceancolor="lightblue",
+        showland=True,
+        landcolor="white",
+        showcoastlines=True,
+        coastlinecolor="darkgray",
+        showframe=False
+    )
+    fig.update_layout(height=500, margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_traces(marker_line_color='black', 
+                  marker_line_width=0.5)
+
+    st.plotly_chart(fig)
