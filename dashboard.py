@@ -198,9 +198,8 @@ if add_sidebar == 'Top 10 Analysis':
     with col2:
         st.plotly_chart(fig_subs_added)
         st.plotly_chart(fig_subs_removed)
-    
-    st.write("The video \" How I Would Learn Data Science (If I Had To Start Over)\" is the best performing video, having any where from doubling to nearly quintupling the number of engagement of the second-running up.")
-    st.write("An interesting video's metrics is the one titled \" Why I Quit Data Science\" ranking the third highest subscriber lost. This could potentially be a result of misleading title where creators would use ambiguous thumbnails to gain clicks but result in negative feedback from viewers")
+        st.write("The video \" How I Would Learn Data Science (If I Had To Start Over)\" is the best performing video, having any where from doubling to nearly quintupling the number of engagement of the second-running up.")
+        st.write("An interesting video's metrics is the one titled \" Why I Quit Data Science\" ranking the third highest subscriber lost. This could potentially be a result of misleading title where creators would use ambiguous thumbnails to gain clicks but result in negative feedback from viewers")
     country_mapping = {
     'AF': 'AFG', 'AX': 'ALA',
     'AL': 'ALB', 'DZ': 'DZA',
