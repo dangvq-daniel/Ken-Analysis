@@ -32,7 +32,10 @@ def audience_simple(country):
         return 'India'
     else:
         return 'Other'
-
+ 
+st.set_page_config(layout='wide')
+st.title('Analysis of Ken Jee\'s performance')
+    
 def load_data():
     """ Loads in 4 dataframes and does light feature engineering"""
     df_agg = pd.read_csv('Aggregated_Metrics_By_Video.csv').iloc[1:,:]
