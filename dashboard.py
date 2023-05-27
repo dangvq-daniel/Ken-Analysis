@@ -167,6 +167,7 @@ if add_sidebar == 'Individual Video Analysis':
     st.plotly_chart(fig2)
 
 if add_sidebar == 'Top 10 Analysis':
+    col1, col2 = st.columns(2)
     df_agg_sub_sum = df_agg_sub.groupby('Video Title').agg({
     'Views' : 'sum',
     'Video Likes Added': 'sum',
@@ -189,11 +190,14 @@ if add_sidebar == 'Top 10 Analysis':
     fig_subs_added = px.bar(top_sub_gain, x='User Subscriptions Added', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Added')
     fig_subs_removed = px.bar(top_sub_lost, x='User Subscriptions Removed', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Removed')
     
-    st.plotly_chart(fig_views)
-    st.plotly_chart(fig_likes)
-    st.plotly_chart(fig_dislikes)
-    st.plotly_chart(fig_subs_added)
-    st.plotly_chart(fig_subs_removed)
+    with col1:
+        st.plotly_chart(fig_views)
+        st.plotly_chart(fig_likes)
+        st.plotly_chart(fig_dislikes)
+    
+    with col2:
+        st.plotly_chart(fig_subs_added)
+        st.plotly_chart(fig_subs_removed)
     
     st.write("The video \" How I Would Learn Data Science (If I Had To Start Over)\" is the best performing video, having any where from doubling to nearly quintupling the number of engagement of the second-running up.")
     st.write("An interesting video's metrics is the one titled \" Why I Quit Data Science\" ranking the third highest subscriber lost. This could potentially be a result of misleading title where creators would use ambiguous thumbnails to gain clicks but result in negative feedback from viewers")
