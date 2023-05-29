@@ -184,11 +184,13 @@ if add_sidebar == 'Top 10 Analysis':
     top_sub_gain = df_agg_sub_sum.nlargest(10, 'User Subscriptions Added')
     top_sub_lost = df_agg_sub_sum.nlargest(10, 'User Subscriptions Removed')
     
-    fig_views = px.bar(top_views, x='Views', y='Video Title', orientation='h', title='Top 10 Videos by Views')
-    fig_likes = px.bar(top_likes, x='Total Likes', y='Video Title', orientation = 'h', title='Top 10 Most Liked Videos')
-    fig_dislikes = px.bar(top_dislikes, x='Video Dislikes Added', y = 'Video Title', orientation='h', title= 'Top 10 Most Disliked Videos')
-    fig_subs_added = px.bar(top_sub_gain, x='User Subscriptions Added', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Added')
-    fig_subs_removed = px.bar(top_sub_lost, x='User Subscriptions Removed', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Removed')
+    fig_views = px.bar(top_views, x='Views', y='Video Title', orientation='h', title='Top 10 Videos by Views', color = 'yellow')
+    fig_likes = px.bar(top_likes, x='Total Likes', y='Video Title', orientation = 'h', title='Top 10 Most Liked Videos', color = 'green')
+    fig_dislikes = px.bar(top_dislikes, x='Video Dislikes Added', y = 'Video Title', orientation='h', title= 'Top 10 Most Disliked Videos', color = 'red')
+    fig_subs_added = px.bar(top_sub_gain, x='User Subscriptions Added', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Added', color = 'blue')
+    fig_subs_removed = px.bar(top_sub_lost, x='User Subscriptions Removed', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Removed', color = 'gray')
+    
+    fig_subs_removed.update_trace(marker=dict(color='red'), selector=dict(name=str(7)))
     
     with col1:
         st.plotly_chart(fig_views)
