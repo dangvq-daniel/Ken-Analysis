@@ -198,7 +198,7 @@ if add_sidebar == 'Top 10 Analysis':
     
     fig_subs_removed = px.bar(top_sub_lost, x='User Subscriptions Removed', y='Video Title', orientation='h', title='Top 10 Videos by Subscriptions Removed')
     fig_subs_removed.update_traces(marker_color='gray')
-    fig_subs_removed.update_traces(selected=dict(marker_color='red'), selector=dict(name='Why I Quit Data Science'))
+    fig_subs_removed.update_traces(selected=dict(marker_color='red'), selector=dict(y='Why I Quit Data Science'))
     
     with col1:
         st.plotly_chart(fig_views)
