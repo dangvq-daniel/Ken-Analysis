@@ -201,12 +201,12 @@ if add_sidebar == 'Top 10 Analysis':
     fig_subs_removed.update_traces(marker_color=['gray' if title != highlight_title else 'red' for title in fig_subs_removed.data[0].y])
     
     with col1:
-        st.plotly_chart(fig_views)
-        st.plotly_chart(fig_likes)
         st.plotly_chart(fig_dislikes)
+        st.plotly_chart(fig_subs_added)
+        st.plotly_chart(fig_views)
     
     with col2:
-        st.plotly_chart(fig_subs_added)
+        st.plotly_chart(fig_likes)
         st.plotly_chart(fig_subs_removed)
         st.write("The video \" How I Would Learn Data Science (If I Had To Start Over)\" is the best performing video, having any where from doubling to nearly quintupling the number of engagement of the second-running up.")
         st.write("An interesting video's metrics is the one titled \" Why I Quit Data Science\" ranking the third highest subscriber lost. This could potentially be a result of misleading title where creators would use ambiguous thumbnails to gain clicks but result in negative feedback from viewers")
