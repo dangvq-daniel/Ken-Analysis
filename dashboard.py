@@ -453,7 +453,8 @@ if add_sidebar == 'Top 10 Analysis':
     fig.update_layout(height=500, margin={"r": 0, "t": 0, "l": 0, "b": 0})
     fig.update_traces(marker_line_color='black', 
                   marker_line_width=0.5)
-
+    
+    st.info('Subscribers by Countries')
     st.plotly_chart(fig)
     
     excluded_countries = ['USA', 'IND']
@@ -485,5 +486,6 @@ if add_sidebar == 'Top 10 Analysis':
     fig.update_layout(height=500, margin={"r": 0, "t": 0, "l": 0, "b": 0})
     fig.update_traces(marker_line_color='black', 
                   marker_line_width=0.5)
-
+    
+    st.info("Subscribers by Countries (Except USA, IND')") 
     st.plotly_chart(fig)
