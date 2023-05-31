@@ -128,7 +128,7 @@ if add_sidebar == 'Aggregate Metrics':
     
     highlight_title = '2020'
     fig = px.bar(df_yearly_videos, x = 'Year', y = 'Video', labels = {'Video': 'Number of Videos'}, title='Videos by Year')
-    fig.update_traces(marker_color=['purple' if year == highlight_title else 'blue' for year in fig.data[0].x])
+    fig.update_traces(marker_color=['green' if year == highlight_title else 'blue' for year in fig.data[0].x])
     st.plotly_chart(fig)
     
     st.write("As we can clearly see, 2020 stands head and shoulder above all others doubling the second highest video per year count in 2019. Starting from 2019, Ken Jee have increased his involvment in content creation dramatically, perhaps signalling his checkpoint for the devotion for Youtube.")
